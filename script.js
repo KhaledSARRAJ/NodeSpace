@@ -1,21 +1,21 @@
-const getTodos = (callback)=>{
+const getTodos = (url, callback)=>{
     const request = new XMLHttpRequest();
  request.addEventListener('readystatechange', ()=>{
      // console.log(request);
      if(request.readyState === 4 && request.status===200){
-callback(undefined,request.responseText);
+         const data = JSON.parse(request.responseText);
+callback(undefined,data[0]);
     }else if(request.readyState===4){
 callback('Could not fetch data',undefined);
      }
  });
  
- request.open('GET', 'https://jsonplaceholder.typicode.com/todos');
+ request.open('GET', url);
  request.send(); 
 }
-console.log(1);
-console.log(2);
 
-getTodos((err, data)=>{
+
+getTodos('https://jsonplaceholder.typicode.com/todos',(err, data)=>{
 console.log('Appel du callback');
 if(err){
     console.log(err);
@@ -23,5 +23,3 @@ if(err){
 console.log(data);
 }
 });
-console.log(3);
-console.log(4);
