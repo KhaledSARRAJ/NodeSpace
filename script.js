@@ -34,12 +34,15 @@
 const getSomething = ()=>{
     return new Promise((resolve, reject)=>{
 //network call
-//resolve('Data received');
-reject('Data not availlable')
+resolve('Data received');
+//reject('Data not availlable')
     });
 }
 
-getSomething().then((data)=> console.log(data), (err)=>console.log(err));
+//getSomething().then((data)=> console.log(data), (err)=>console.log(err));
+getSomething()
+.then(data=> console.log(data))
+.catch((err) => console.log(err));
 
 
 
