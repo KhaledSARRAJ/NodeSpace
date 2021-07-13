@@ -4,7 +4,7 @@ const getTodos = (url, callback)=>{
      // console.log(request);
      if(request.readyState === 4 && request.status===200){
          const data = JSON.parse(request.responseText);
-callback(undefined,data[0]);
+callback(undefined,data);
     }else if(request.readyState===4){
 callback('Could not fetch data',undefined);
      }
@@ -16,10 +16,15 @@ callback('Could not fetch data',undefined);
 
 
 getTodos('https://jsonplaceholder.typicode.com/todos',(err, data)=>{
-console.log('Appel du callback');
-if(err){
-    console.log(err);
-}else{
 console.log(data);
-}
+getTodos('https://jsonplaceholder.typicode.com/todos/'+data[0].userId,(err, data)=>{
+    console.log(data);
+    getTodos('https://jsonplaceholder.typicode.com/todos/'+data.userId+'/comments',(err, data)=>{
+
+        console.log(data);
+
+    });
+
+});
+
 });
